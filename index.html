@@ -1,652 +1,723 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>PHKBank</title>
-  <meta name="description" content="PHKBank — ONE WORLD · ONE PI · ONE FUTURE" />
-  <meta name="theme-color" content="#0b0f18" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>PHK Bank · PHK Global</title>
+  <meta name="description" content="PHK Bank and PHK Global — System first. Trust first. Profit later." />
 
   <style>
     :root{
-      --bg1:#070a10;
-      --bg2:#0b0f18;
-      --card:#0f1623;
-      --card2:#0b1220;
-      --text:#e9eef9;
-      --muted:rgba(233,238,249,.62);
-      --muted2:rgba(233,238,249,.42);
-      --line:rgba(255,255,255,.10);
-      --soft:rgba(255,255,255,.06);
-      --soft2:rgba(255,255,255,.04);
-      --yellow:#ffcc33;
-      --shadow: 0 16px 40px rgba(0,0,0,.55);
+      --bg:#0b1220;
+      --card:#0f1a33;
+      --card2:#0c1730;
+      --text:#eaf0ff;
+      --muted:#b8c3e6;
+      --line:rgba(255,255,255,.12);
+      --accent:#7aa7ff;
+      --accent2:#67f0c8;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
       --radius:22px;
-      --radius2:26px;
-      --max: 720px;
+      --radius2:16px;
+      --max:1100px;
+      --pad:18px;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-        "Apple SD Gothic Neo","Noto Sans KR","Noto Sans Arabic", sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple SD Gothic Neo","Noto Sans KR","Noto Sans Arabic","Noto Sans SC", sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 50% -10%, rgba(255,204,51,.09), transparent 55%),
-        radial-gradient(1200px 700px at 20% 0%, rgba(120,169,255,.10), transparent 55%),
-        radial-gradient(1200px 700px at 85% 10%, rgba(171,120,255,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
+        radial-gradient(1200px 700px at 20% 10%, rgba(122,167,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 90% 20%, rgba(103,240,200,.10), transparent 60%),
+        radial-gradient(900px 700px at 40% 100%, rgba(122,167,255,.10), transparent 60%),
+        var(--bg);
+      line-height:1.55;
     }
-
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding: 18px 16px 46px;
-    }
-
-    /* Top bar */
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 12px 10px 10px;
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px var(--pad) 50px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      position:sticky; top:0; z-index:50;
+      padding:14px var(--pad);
+      margin:0 calc(-1 * var(--pad));
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.55);
+      border-bottom: 1px solid var(--line);
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      min-width: 140px;
+      display:flex; align-items:center; gap:12px; min-width: 200px;
     }
-    .dot{
-      width:18px; height:18px; border-radius:999px;
-      background: rgba(255,255,255,.75);
-      box-shadow: 0 6px 14px rgba(0,0,0,.35);
-      opacity:.9;
+    .logo{
+      width:40px;height:40px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(122,167,255,.95), rgba(103,240,200,.85));
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+      position:relative; overflow:hidden;
     }
-    .brandName{
-      font-weight:900;
-      letter-spacing:.2px;
-      font-size:18px;
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 35%);
+      transform: rotate(25deg);
     }
-
-    .langWrap{
-      position:relative;
-      width: 170px;
-      max-width: 52vw;
+    .brand h1{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.4px;
+      line-height:1.2;
     }
-    .langBtn{
-      width:100%;
+    .brand .sub{font-size:12px;color:var(--muted)}
+    .controls{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    select, button, .btn{
       border:1px solid var(--line);
       background: rgba(255,255,255,.06);
-      color: var(--text);
-      padding: 12px 14px;
-      border-radius: 999px;
-      display:flex;
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 14px;
+      font-weight:600;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      text-decoration:none;
+      display:inline-flex;
       align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
-      cursor:pointer;
+      gap:8px;
       user-select:none;
-      backdrop-filter: blur(10px);
     }
-    .langBtn span{font-weight:800; font-size:14px}
-    .chev{
-      width:10px; height:10px;
-      border-right:2px solid rgba(233,238,249,.75);
-      border-bottom:2px solid rgba(233,238,249,.75);
-      transform: rotate(45deg);
-      margin-top:-2px;
-      opacity:.85;
+    select{font-weight:700}
+    select:focus, button:focus{outline:2px solid rgba(122,167,255,.35); outline-offset:2px}
+    button:hover, .btn:hover, select:hover{background: rgba(255,255,255,.085); border-color: rgba(122,167,255,.35)}
+    button:active, .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      border-color: rgba(122,167,255,.45);
+      background: linear-gradient(135deg, rgba(122,167,255,.22), rgba(103,240,200,.12));
     }
-
-    .menu{
-      position:absolute;
-      top: calc(100% + 10px);
-      right:0;
-      width:100%;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(12,18,32,.92);
-      box-shadow: 0 22px 50px rgba(0,0,0,.55);
-      overflow:hidden;
-      display:none;
-      z-index:20;
-    }
-    .menu.show{display:block}
-    .menu button{
-      width:100%;
-      border:0;
-      background: transparent;
-      color: var(--text);
-      padding: 12px 14px;
-      text-align:left;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .menu button:hover{background: rgba(255,255,255,.06)}
-    .menu button.active{background: rgba(255,204,51,.10)}
-
-    /* Hero */
+    .btn.primary:hover{border-color: rgba(122,167,255,.7)}
     .hero{
-      text-align:center;
-      padding: 14px 8px 10px;
-    }
-    .appIcon{
-      width: 92px; height: 92px;
-      margin: 8px auto 10px;
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255,204,51,.55), transparent 58%),
-        radial-gradient(circle at 70% 75%, rgba(170,120,255,.60), transparent 58%),
-        radial-gradient(circle at 70% 30%, rgba(120,169,255,.55), transparent 58%),
-        rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 28px 70px rgba(0,0,0,.55);
+      margin-top: 26px;
       display:grid;
-      place-items:center;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items: stretch;
     }
-    .piMark{
-      font-weight:1000;
-      font-size:44px;
-      color: rgba(255,255,255,.92);
-      text-shadow: 0 10px 30px rgba(0,0,0,.35);
+    @media (max-width: 920px){
+      .hero{grid-template-columns: 1fr; }
     }
-    .title{
-      font-size: 56px;
-      font-weight:1000;
-      letter-spacing:.4px;
-      margin: 6px 0 6px;
-    }
-    .tagline{
-      margin: 0;
-      font-weight:700;
-      letter-spacing:.28em;
-      color: rgba(233,238,249,.55);
-      font-size: 13px;
-    }
-    .motto{
-      margin: 18px 0 0;
-      font-weight:1000;
-      font-size: 26px;
-      color: var(--yellow);
-      letter-spacing: -.5px;
-    }
-
-    /* Section headings */
-    .sectionLabel{
-      margin: 26px 6px 10px;
-      font-weight:900;
-      font-size: 18px;
-      color: rgba(233,238,249,.88);
-      letter-spacing:.2px;
-      text-align:left;
-    }
-    .sectionLabel small{
-      font-weight:800;
-      color: rgba(233,238,249,.62);
-    }
-
-    /* Cards */
     .card{
-      border:1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius: var(--radius2);
-      padding: 22px 20px;
+      background: linear-gradient(180deg, rgba(15,26,51,.92), rgba(12,23,48,.86));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin: 14px 0;
-      position:relative;
+      padding: 22px;
       overflow:hidden;
+      position:relative;
     }
     .card:before{
       content:"";
-      position:absolute;
-      inset:-2px;
+      position:absolute; inset:-1px;
       background:
-        radial-gradient(500px 220px at 20% 0%, rgba(255,204,51,.08), transparent 60%),
-        radial-gradient(500px 220px at 80% 0%, rgba(120,169,255,.07), transparent 60%);
+        radial-gradient(600px 200px at 20% 0%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(500px 200px at 100% 10%, rgba(103,240,200,.12), transparent 60%);
       pointer-events:none;
     }
     .card > *{position:relative}
-
-    .card h3{
-      margin: 0 0 10px;
-      font-size: 34px;
-      letter-spacing:-.8px;
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.6px;
+      text-transform:uppercase;
     }
-    .card p{
-      margin: 0;
-      color: rgba(233,238,249,.60);
-      font-weight:800;
-      font-size: 16px;
+    .dot{
+      width:8px;height:8px;border-radius:999px;background: var(--accent2);
+      box-shadow: 0 0 18px rgba(103,240,200,.55);
     }
-    .card .sub{
-      margin-top: 10px;
-      color: rgba(233,238,249,.38);
-      font-weight:800;
-      font-size: 15px;
-      letter-spacing:-.2px;
-      line-height:1.45;
-    }
-
-    /* External channels title */
-    .centerLine{
-      text-align:center;
-      color: rgba(233,238,249,.35);
-      font-weight:900;
-      letter-spacing:.12em;
-      margin: 26px 0 14px;
-    }
-
-    /* Footer contact */
-    .contactCard{
-      margin-top: 18px;
-      padding: 18px 16px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 16px 40px rgba(0,0,0,.45);
-    }
-    .contactRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .email{
-      font-weight:1000;
-      text-decoration:underline;
+    .title{
+      margin: 10px 0 10px;
+      font-size: 30px;
+      line-height:1.18;
       letter-spacing:.2px;
     }
-    .copyBtn{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
+    .lead{margin:0; color:var(--muted); font-size:15px; max-width: 62ch;}
+    .pillrow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 16px;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      padding:10px 12px;
       border-radius: 999px;
-      padding: 10px 12px;
-      font-weight:900;
-      cursor:pointer;
+      font-size:13px;
+      color:var(--text);
     }
-    .copyBtn:hover{background: rgba(255,255,255,.10)}
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:16px;
-      transform:translateX(-50%);
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(12,18,32,.92);
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 18px 60px rgba(0,0,0,.6);
-      display:none;
-      gap:10px;
-      align-items:center;
-      z-index:999;
-      max-width: calc(100% - 24px);
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
     }
-    .toast.show{display:flex}
-    .toastDot{width:8px;height:8px;border-radius:999px;background: var(--yellow); box-shadow: 0 0 16px rgba(255,204,51,.55)}
-    .toastMsg{font-weight:900; font-size:12px; color: rgba(233,238,249,.92)}
-
-    /* RTL */
-    html[dir="rtl"] body{font-family:"Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif}
-    html[dir="rtl"] .top{flex-direction:row-reverse}
-    html[dir="rtl"] .brand{flex-direction:row-reverse}
-    html[dir="rtl"] .menu button{text-align:right}
-    html[dir="rtl"] .sectionLabel{text-align:right}
-    html[dir="rtl"] .contactRow{flex-direction:row-reverse}
+    @media (max-width: 720px){
+      .grid{grid-template-columns: 1fr;}
+    }
+    .mini{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius2);
+      padding: 16px;
+    }
+    .mini h3{margin:0 0 8px; font-size:14px}
+    .mini p{margin:0; color:var(--muted); font-size:13px}
+    .section{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 920px){
+      .section{grid-template-columns: 1fr;}
+    }
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .list li{margin:8px 0}
+    .hr{height:1px; background:var(--line); margin:16px 0}
+    .footer{
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+    }
+    .footer a{color: var(--text); text-decoration: none; border-bottom:1px dashed rgba(255,255,255,.25)}
+    .footer a:hover{border-bottom-color: rgba(122,167,255,.65)}
+    .small{font-size:12px; color: var(--muted)}
+    .rtl{direction: rtl; text-align: right;}
+    .center{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .badge{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      white-space:nowrap;
+    }
+    .notice{
+      margin-top: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(122,167,255,.08);
+      padding: 14px;
+      border-radius: 16px;
+      color: var(--text);
+    }
+    .notice b{color: #ffffff}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- Top -->
-    <div class="top">
-      <div class="brand">
-        <div class="dot" aria-hidden="true"></div>
-        <div class="brandName">PHKBank</div>
-      </div>
-
-      <!-- Language dropdown -->
-      <div class="langWrap">
-        <div class="langBtn" id="langBtn" role="button" aria-haspopup="listbox" aria-expanded="false">
-          <span id="langLabel">한국어</span>
-          <i class="chev" aria-hidden="true"></i>
-        </div>
-        <div class="menu" id="langMenu" role="listbox" aria-label="Language menu">
-          <button type="button" data-lang="ko" class="active">한국어</button>
-          <button type="button" data-lang="en">English</button>
-          <button type="button" data-lang="ar">العربية</button>
-        </div>
+  <div class="topbar">
+    <div class="brand" aria-label="PHK Bank">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>PHK Bank · PHK Global</h1>
+        <div class="sub" id="top_sub">System first · Trust first · Profit later</div>
       </div>
     </div>
 
-    <!-- Hero -->
-    <div class="hero">
-      <div class="appIcon" aria-hidden="true"><div class="piMark">π</div></div>
-      <div class="title">PHKBank</div>
-      <p class="tagline" id="t_tagline">ONE WORLD · ONE PI · ONE FUTURE</p>
-      <div class="motto" id="t_motto">사람이 먼저, 이유는 그 다음</div>
-    </div>
+    <div class="controls">
+      <select id="lang" aria-label="Language">
+        <option value="ko">한국어</option>
+        <option value="en" selected>English</option>
+        <option value="ar">العربية</option>
+        <option value="zh">中文</option>
+      </select>
 
-    <!-- Core -->
-    <div class="sectionLabel" id="t_coreTitle">PHKBank Core <small>· 실행 영역</small></div>
+      <!-- 링크는 여기만 바꾸면 됩니다 -->
+      <a class="btn primary" id="btn_email" href="mailto:info@phk.global">info@phk.global</a>
+      <a class="btn" id="btn_phkglobal" href="#global">PHK Global</a>
+      <a class="btn" id="btn_phkbank" href="#bank">PHK Bank</a>
 
-    <div class="card" id="card_ubi">
-      <h3 id="t_ubi_title">기본소득</h3>
-      <p id="t_ubi_sub">기본소득 리워드</p>
-      <div class="sub" id="t_ubi_desc">정기 지급 · 참여 기반 · 생태계 환원</div>
-    </div>
-
-    <div class="card" id="card_pay">
-      <h3 id="t_pay_title">결제</h3>
-      <p id="t_pay_sub">결제 · 송금</p>
-      <div class="sub" id="t_pay_desc">결제 · 송금 · 정산 · 가치 이전</div>
-    </div>
-
-    <div class="card" id="card_apy">
-      <h3 id="t_apy_title">예치율</h3>
-      <p id="t_apy_sub">31.4% APY (데모)</p>
-      <div class="sub" id="t_apy_desc">안정성 · 유동성 · 장기 운영</div>
-    </div>
-
-    <div class="card" id="card_reward">
-      <h3 id="t_reward_title">보상</h3>
-      <p id="t_reward_sub">참여 · 기여 기반</p>
-      <div class="sub" id="t_reward_desc">활동 기록 · 기여 평가 · 보상 분배</div>
-    </div>
-
-    <!-- External channels -->
-    <div class="centerLine" id="t_external">External Channels</div>
-
-    <div class="card" id="card_youtube" style="cursor:pointer">
-      <h3>YouTube</h3>
-      <p id="t_youtube_sub">PHKBank 공식 영상 채널</p>
-    </div>
-
-    <div class="card" id="card_tiktok" style="cursor:pointer">
-      <h3>TikTok</h3>
-      <p id="t_tiktok_sub">PHKBank 공식 틱톡 채널</p>
-    </div>
-
-    <!-- Framework -->
-    <div class="sectionLabel" id="t_frameTitle">PHKBank Framework <small>· 구조 영역</small></div>
-
-    <div class="card">
-      <h3 id="t_fw_title">PHKBank Framework</h3>
-      <p id="t_fw_sub">PHKBank는 단순 금융 앱이 아니라 결제·산업·기술·UBI를 통합하는 금융 운영체계(OS)입니다.</p>
-      <div class="sub" id="t_fw_desc">금융 OS · 구조 설계 · 장기 확장</div>
-    </div>
-
-    <div class="card">
-      <h3 id="t_ge_title">Global Expansion</h3>
-      <p id="t_ge_sub">PHKBank는 국가 단위를 넘어 글로벌 결제·정산·산업 연동 구조로 확장됩니다.</p>
-      <div class="sub" id="t_ge_desc">국제 연동 · 파트너십 · 확장 구조</div>
-    </div>
-
-    <!-- ✅ 여기: PWB Global -> PHK Global (요청 반영) -->
-    <div class="card">
-      <h3 id="t_pg_title">PHK Global</h3>
-      <p id="t_pg_sub">PHKBank의 하위 글로벌 확장 프레임으로, 국제 금융·산업·UBI 구조를 담당합니다.</p>
-      <div class="sub" id="t_pg_desc">Sub Framework</div>
-    </div>
-
-    <!-- Contact (메일 주소) -->
-    <div class="contactCard" id="contact">
-      <div class="contactRow">
-        <div>
-          <div style="font-weight:1000; font-size:14px; margin-bottom:6px" id="t_contactTitle">Contact</div>
-          <div style="color:rgba(233,238,249,.70); font-weight:900; font-size:13px">
-            <span id="t_emailLabel">Email</span>:
-            <a class="email" id="emailLink" href="mailto:info@phkglobal.com">info@phkglobal.com</a>
-          </div>
-        </div>
-        <button class="copyBtn" id="copyBtn">📋 <span id="t_copy">Copy</span></button>
-      </div>
+      <!-- 유튜브/틱톡: 딱 1개씩만 유지 -->
+      <a class="btn" id="btn_youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+      <a class="btn" id="btn_tiktok" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
     </div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <div class="toastDot" aria-hidden="true"></div>
-    <div class="toastMsg" id="toastMsg">Copied</div>
+  <div class="wrap">
+    <div class="hero">
+      <section class="card" aria-label="Hero">
+        <div class="kicker"><span class="dot"></span><span id="kicker">Official Core Statement</span></div>
+        <h2 class="title" id="hero_title">PHK Bank is a System.</h2>
+        <p class="lead" id="hero_lead">
+          We do not prioritize short-term profit. Profit comes after the structure is complete.
+          We build a trustworthy financial system connected to real industries.
+        </p>
+
+        <div class="pillrow" aria-label="Key principles">
+          <span class="pill" id="pill1">Profit later</span>
+          <span class="pill" id="pill2">Structure first</span>
+          <span class="pill" id="pill3">Trust first</span>
+          <span class="pill" id="pill4">Global framework</span>
+        </div>
+
+        <div class="grid">
+          <div class="mini">
+            <h3 id="mini1_title">Core Rule</h3>
+            <p id="mini1_body">“Profit is the result, not the goal.”</p>
+          </div>
+          <div class="mini">
+            <h3 id="mini2_title">Brand Unification</h3>
+            <p id="mini2_body">PWB Global is fully integrated into PHK Global.</p>
+          </div>
+          <div class="mini">
+            <h3 id="mini3_title">System Focus</h3>
+            <p id="mini3_body">Finance + Robotics + Energy + Space, connected as one structure.</p>
+          </div>
+          <div class="mini">
+            <h3 id="mini4_title">Contact</h3>
+            <p class="mono" id="mini4_body">info@phk.global · info@phkbank.global</p>
+          </div>
+        </div>
+
+        <div class="notice" id="email_notice">
+          <b id="email_notice_b">Mobile email not showing?</b>
+          <span id="email_notice_t">
+            Check Spam/Promotions and enable sync in your mail app. For urgent messages, confirm via web or PC.
+          </span>
+        </div>
+      </section>
+
+      <aside class="card" aria-label="Quick summary">
+        <div class="kicker"><span class="dot"></span><span id="quick_kicker">Quick Summary</span></div>
+        <h2 class="title" style="font-size:22px" id="quick_title">PHK Global = the Global Frame</h2>
+        <p class="lead" id="quick_lead">
+          PHK Global is the expansion and governance framework centered on PHK Bank.
+          All global documents, apps, and projects unify under PHK Global.
+        </p>
+
+        <div class="hr"></div>
+
+        <div class="center" aria-label="Structure badges">
+          <span class="badge" id="badge_main">MAIN: PHK Bank</span>
+          <span class="badge" id="badge_frame">FRAME: PHK Global</span>
+          <span class="badge" id="badge_stop">STOP: PWB Global name</span>
+        </div>
+
+        <ul class="list" id="quick_list">
+          <li>Global financial infrastructure and stability design</li>
+          <li>UBI-ready sustainable distribution framework</li>
+          <li>Integration with real industries (Robotics/Energy/Space)</li>
+          <li>Single unified global brand: PHK Global</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <a class="btn primary" href="#contact" id="cta">Contact / Official Mail</a>
+      </aside>
+    </div>
+
+    <div class="section">
+      <section class="card" id="bank" aria-label="PHK Bank">
+        <div class="kicker"><span class="dot"></span><span id="bank_kicker">PHK Bank</span></div>
+        <h2 class="title" style="font-size:24px" id="bank_title">Profit is the next step.</h2>
+        <p class="lead" id="bank_lead">
+          PHK Bank prioritizes structure, governance, and trust. We build a system that can scale from cities to nations.
+        </p>
+
+        <div class="hr"></div>
+
+        <h3 style="margin:0 0 8px; font-size:16px" id="bank_h3">Primary Purposes</h3>
+        <ul class="list" id="bank_list">
+          <li>Build global financial infrastructure</li>
+          <li>Design stability framework for cities, industries, and nations</li>
+          <li>Enable UBI-ready distribution models</li>
+          <li>Connect finance to real production and services</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="small" id="bank_note">
+          Statement: “We do not chase profit first. We complete the system first.”
+        </p>
+      </section>
+
+      <section class="card" id="global" aria-label="PHK Global">
+        <div class="kicker"><span class="dot"></span><span id="global_kicker">PHK Global</span></div>
+        <h2 class="title" style="font-size:24px" id="global_title">PWB Global → PHK Global</h2>
+        <p class="lead" id="global_lead">
+          The former PWB Global is officially integrated into PHK Global. The PWB Global name is no longer used.
+        </p>
+
+        <div class="hr"></div>
+
+        <h3 style="margin:0 0 8px; font-size:16px" id="global_h3">PHK Global Role</h3>
+        <ul class="list" id="global_list">
+          <li>Global expansion hub for PHK Bank</li>
+          <li>Govern and unify documents, apps, and projects</li>
+          <li>Connect Robotics · Fusion Energy · Space Industry with finance</li>
+          <li>Coordinate international partnerships and nation-scale programs</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="small" id="global_note">
+          All global operations are unified under PHK Global. One framework. One voice.
+        </p>
+      </section>
+    </div>
+
+    <section class="card" id="contact" aria-label="Contact">
+      <div class="kicker"><span class="dot"></span><span id="contact_kicker">Contact</span></div>
+      <h2 class="title" style="font-size:24px" id="contact_title">Official Mail</h2>
+      <p class="lead" id="contact_lead">
+        Use the official emails below. If mobile inbox does not show messages, check spam/promotions or use web/PC.
+      </p>
+
+      <div class="pillrow">
+        <a class="btn primary mono" href="mailto:info@phk.global" id="mail1">info@phk.global</a>
+        <a class="btn mono" href="mailto:info@phkbank.global" id="mail2">info@phkbank.global</a>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="footer">
+        <div id="foot_left">© <span id="year"></span> PHK Bank · PHK Global</div>
+        <div class="center">
+          <a href="#bank" id="foot_bank">PHK Bank</a>
+          <span class="small">·</span>
+          <a href="#global" id="foot_global">PHK Global</a>
+          <span class="small">·</span>
+          <a href="mailto:info@phk.global" id="foot_email">Email</a>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
-    (function(){
-      const EMAIL = "info@phkglobal.com";
+    // ====== 링크(유튜브/틱톡)만 여기서 바꾸면 됩니다 ======
+    // 예) document.getElementById('btn_youtube').href = 'https://www.youtube.com/@YOURCHANNEL';
+    // 예) document.getElementById('btn_tiktok').href = 'https://www.tiktok.com/@YOURID';
 
-      // ====== LINKS (원하시면 여기에 실제 채널 링크 넣으시면 됩니다) ======
-      const YOUTUBE_URL = ""; // 예: "https://www.youtube.com/@yourchannel"
-      const TIKTOK_URL = ""; // 예: "https://www.tiktok.com/@youraccount"
+    const year = new Date().getFullYear();
+    document.getElementById('year').textContent = year;
 
-      const T = {
-        ko:{
-          langLabel:"한국어",
-          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
-          motto:"사람이 먼저, 이유는 그 다음",
-          coreTitle:`PHKBank Core <small>· 실행 영역</small>`,
-          ubi_title:"기본소득", ubi_sub:"기본소득 리워드", ubi_desc:"정기 지급 · 참여 기반 · 생태계 환원",
-          pay_title:"결제", pay_sub:"결제 · 송금", pay_desc:"결제 · 송금 · 정산 · 가치 이전",
-          apy_title:"예치율", apy_sub:"31.4% APY (데모)", apy_desc:"안정성 · 유동성 · 장기 운영",
-          reward_title:"보상", reward_sub:"참여 · 기여 기반", reward_desc:"활동 기록 · 기여 평가 · 보상 분배",
-          external:"External Channels",
-          youtube_sub:"PHKBank 공식 영상 채널",
-          tiktok_sub:"PHKBank 공식 틱톡 채널",
-          frameTitle:`PHKBank Framework <small>· 구조 영역</small>`,
-          fw_title:"PHKBank Framework",
-          fw_sub:"PHKBank는 단순 금융 앱이 아니라 결제·산업·기술·UBI를 통합하는 금융 운영체계(OS)입니다.",
-          fw_desc:"금융 OS · 구조 설계 · 장기 확장",
-          ge_title:"Global Expansion",
-          ge_sub:"PHKBank는 국가 단위를 넘어 글로벌 결제·정산·산업 연동 구조로 확장됩니다.",
-          ge_desc:"국제 연동 · 파트너십 · 확장 구조",
-          pg_title:"PHK Global",
-          pg_sub:"PHKBank의 하위 글로벌 확장 프레임으로, 국제 금융·산업·UBI 구조를 담당합니다.",
-          pg_desc:"Sub Framework",
-          contactTitle:"Contact",
-          emailLabel:"Email",
-          copy:"Copy",
-          copied:"복사 완료"
-        },
-        en:{
-          langLabel:"English",
-          tagline:"ONE WORLD · ONE PI · ONE FUTURE",
-          motto:"People first. Reasons follow.",
-          coreTitle:`PHKBank Core <small>· Execution</small>`,
-          ubi_title:"UBI", ubi_sub:"Universal basic income rewards", ubi_desc:"Scheduled distribution · participation-based · ecosystem return",
-          pay_title:"Payments", pay_sub:"Pay · Transfer", pay_desc:"Payments · transfers · settlement · value exchange",
-          apy_title:"Deposit Rate", apy_sub:"31.4% APY (Demo)", apy_desc:"Stability · liquidity · long-term operation",
-          reward_title:"Rewards", reward_sub:"Participation · contribution", reward_desc:"Activity logs · contribution scoring · reward distribution",
-          external:"External Channels",
-          youtube_sub:"Official PHKBank video channel",
-          tiktok_sub:"Official PHKBank TikTok channel",
-          frameTitle:`PHKBank Framework <small>· Architecture</small>`,
-          fw_title:"PHKBank Framework",
-          fw_sub:"PHKBank is not a simple finance app — it is an operating system (OS) integrating payments, industry, technology, and UBI.",
-          fw_desc:"Finance OS · system design · long-term scaling",
-          ge_title:"Global Expansion",
-          ge_sub:"PHKBank expands beyond borders into a global structure for payments, settlement, and industry integration.",
-          ge_desc:"Interoperability · partnerships · scaling structure",
-          pg_title:"PHK Global",
-          pg_sub:"A global expansion sub-framework under PHKBank, responsible for international finance, industry linkage, and UBI structure.",
-          pg_desc:"Sub Framework",
-          contactTitle:"Contact",
-          emailLabel:"Email",
-          copy:"Copy",
-          copied:"Copied"
-        },
-        ar:{
-          langLabel:"العربية",
-          tagline:"عالم واحد · Pi واحد · مستقبل واحد",
-          motto:"الإنسان أولاً، ثم الأسباب.",
-          coreTitle:`PHKBank Core <small>· التنفيذ</small>`,
-          ubi_title:"الدخل الأساسي", ubi_sub:"مكافآت الدخل الأساسي", ubi_desc:"توزيع دوري · قائم على المشاركة · عائد للنظام البيئي",
-          pay_title:"المدفوعات", pay_sub:"دفع · تحويل", pay_desc:"مدفوعات · تحويلات · تسوية · نقل قيمة",
-          apy_title:"معدل الإيداع", apy_sub:"31.4% APY (عرض)", apy_desc:"استقرار · سيولة · تشغيل طويل الأمد",
-          reward_title:"المكافآت", reward_sub:"مشاركة · مساهمة", reward_desc:"سجل النشاط · تقييم المساهمة · توزيع المكافآت",
-          external:"قنوات خارجية",
-          youtube_sub:"القناة الرسمية لفيديوهات PHKBank",
-          tiktok_sub:"القناة الرسمية لـ TikTok الخاصة بـ PHKBank",
-          frameTitle:`PHKBank Framework <small>· الهيكل</small>`,
-          fw_title:"PHKBank Framework",
-          fw_sub:"ليس PHKBank تطبيقًا ماليًا بسيطًا — بل نظام تشغيل يدمج المدفوعات والصناعة والتقنية وUBI.",
-          fw_desc:"نظام مالي · تصميم هيكلي · توسّع طويل الأمد",
-          ge_title:"التوسع العالمي",
-          ge_sub:"يتوسع PHKBank عبر الحدود إلى بنية عالمية للمدفوعات والتسوية وربط الصناعة.",
-          ge_desc:"ترابط دولي · شراكات · بنية توسّع",
-          pg_title:"PHK Global",
-          pg_sub:"إطار توسع عالمي فرعي تحت PHKBank مسؤول عن التمويل الدولي وربط الصناعة وبنية UBI.",
-          pg_desc:"إطار فرعي",
-          contactTitle:"تواصل",
-          emailLabel:"البريد",
-          copy:"نسخ",
-          copied:"تم النسخ"
+    const i18n = {
+      en: {
+        dir: "ltr",
+        top_sub: "System first · Trust first · Profit later",
+        kicker: "Official Core Statement",
+        hero_title: "PHK Bank is a System.",
+        hero_lead: "We do not prioritize short-term profit. Profit comes after the structure is complete. We build a trustworthy financial system connected to real industries.",
+        pill1:"Profit later", pill2:"Structure first", pill3:"Trust first", pill4:"Global framework",
+        mini1_title:"Core Rule", mini1_body:"“Profit is the result, not the goal.”",
+        mini2_title:"Brand Unification", mini2_body:"PWB Global is fully integrated into PHK Global.",
+        mini3_title:"System Focus", mini3_body:"Finance + Robotics + Energy + Space, connected as one structure.",
+        mini4_title:"Contact", mini4_body:"info@phk.global · info@phkbank.global",
+        email_notice_b:"Mobile email not showing?",
+        email_notice_t:"Check Spam/Promotions and enable sync in your mail app. For urgent messages, confirm via web or PC.",
+        quick_kicker:"Quick Summary",
+        quick_title:"PHK Global = the Global Frame",
+        quick_lead:"PHK Global is the expansion and governance framework centered on PHK Bank. All global documents, apps, and projects unify under PHK Global.",
+        badge_main:"MAIN: PHK Bank",
+        badge_frame:"FRAME: PHK Global",
+        badge_stop:"STOP: PWB Global name",
+        quick_list:[
+          "Global financial infrastructure and stability design",
+          "UBI-ready sustainable distribution framework",
+          "Integration with real industries (Robotics/Energy/Space)",
+          "Single unified global brand: PHK Global"
+        ],
+        cta:"Contact / Official Mail",
+        bank_kicker:"PHK Bank",
+        bank_title:"Profit is the next step.",
+        bank_lead:"PHK Bank prioritizes structure, governance, and trust. We build a system that can scale from cities to nations.",
+        bank_h3:"Primary Purposes",
+        bank_list:[
+          "Build global financial infrastructure",
+          "Design stability framework for cities, industries, and nations",
+          "Enable UBI-ready distribution models",
+          "Connect finance to real production and services"
+        ],
+        bank_note:"Statement: “We do not chase profit first. We complete the system first.”",
+        global_kicker:"PHK Global",
+        global_title:"PWB Global → PHK Global",
+        global_lead:"The former PWB Global is officially integrated into PHK Global. The PWB Global name is no longer used.",
+        global_h3:"PHK Global Role",
+        global_list:[
+          "Global expansion hub for PHK Bank",
+          "Govern and unify documents, apps, and projects",
+          "Connect Robotics · Fusion Energy · Space Industry with finance",
+          "Coordinate international partnerships and nation-scale programs"
+        ],
+        global_note:"All global operations are unified under PHK Global. One framework. One voice.",
+        contact_kicker:"Contact",
+        contact_title:"Official Mail",
+        contact_lead:"Use the official emails below. If mobile inbox does not show messages, check spam/promotions or use web/PC.",
+        foot_bank:"PHK Bank",
+        foot_global:"PHK Global",
+        foot_email:"Email"
+      },
+
+      ko: {
+        dir: "ltr",
+        top_sub: "구조 우선 · 신뢰 우선 · 이윤은 그 다음",
+        kicker: "공식 핵심 선언",
+        hero_title: "PHK Bank는 ‘시스템’입니다.",
+        hero_lead: "PHK Bank는 단기 이윤을 우선하지 않습니다. 이윤은 구조가 완성된 뒤에 따라옵니다. 우리는 실물 산업과 연결되는 신뢰 기반 금융 시스템을 설계합니다.",
+        pill1:"이윤은 그 다음", pill2:"구조 우선", pill3:"신뢰 우선", pill4:"글로벌 프레임",
+        mini1_title:"핵심 원칙", mini1_body:"“이윤은 목표가 아니라 결과입니다.”",
+        mini2_title:"브랜드 통합", mini2_body:"PWB Global은 PHK Global로 공식 통합됩니다.",
+        mini3_title:"시스템 집중", mini3_body:"금융 + 로보틱스 + 에너지 + 우주산업을 하나의 구조로 연결합니다.",
+        mini4_title:"공식 메일", mini4_body:"info@phk.global · info@phkbank.global",
+        email_notice_b:"휴대폰에서 메일이 안 뜨나요?",
+        email_notice_t:"스팸/프로모션함을 확인하고, 메일 앱 동기화가 켜져 있는지 확인하세요. 급한 건 웹/PC에서 확인을 권장합니다.",
+        quick_kicker:"요약",
+        quick_title:"PHK Global = 글로벌 확장 프레임",
+        quick_lead:"PHK Global은 PHK Bank 중심의 글로벌 확장·지주·통합 프레임입니다. 모든 글로벌 문서/앱/프로젝트는 PHK Global 체계로 일원화됩니다.",
+        badge_main:"메인: PHK Bank",
+        badge_frame:"프레임: PHK Global",
+        badge_stop:"중단: PWB Global 명칭",
+        quick_list:[
+          "글로벌 금융 인프라 및 안정 구조 설계",
+          "UBI(기본소득) 기반 분배 구조 준비",
+          "실물 산업(로봇/에너지/우주)과 금융 통합",
+          "글로벌 브랜드 단일화: PHK Global"
+        ],
+        cta:"연락 / 공식 메일",
+        bank_kicker:"PHK Bank",
+        bank_title:"이윤은 그 다음입니다.",
+        bank_lead:"PHK Bank는 구조·거버넌스·신뢰를 우선합니다. 도시에서 국가까지 확장 가능한 금융 시스템을 설계합니다.",
+        bank_h3:"1차 목적",
+        bank_list:[
+          "글로벌 금융 인프라 구축",
+          "도시·산업·국가 단위 안정 구조 설계",
+          "UBI(기본소득) 기반 모델 준비",
+          "실물 생산·서비스와 금융의 직접 연결"
+        ],
+        bank_note:"선언: “이윤을 먼저 쫓지 않습니다. 시스템을 먼저 완성합니다.”",
+        global_kicker:"PHK Global",
+        global_title:"PWB Global → PHK Global",
+        global_lead:"기존 PWB Global은 PHK Global로 공식 통합되며, PWB Global 명칭은 더 이상 사용하지 않습니다.",
+        global_h3:"PHK Global 역할",
+        global_list:[
+          "PHK Bank 글로벌 확장 허브",
+          "문서·앱·프로젝트 통합 및 관리",
+          "로보틱스·인공태양(핵융합)·우주산업과 금융 연결",
+          "국가 단위 협력 및 국제 파트너십 총괄"
+        ],
+        global_note:"모든 글로벌 운영은 PHK Global로 일원화됩니다. 하나의 프레임, 하나의 목소리.",
+        contact_kicker:"연락",
+        contact_title:"공식 메일",
+        contact_lead:"아래 공식 메일을 사용하세요. 휴대폰에서 안 보이면 스팸/프로모션함 및 동기화 설정을 확인하거나 웹/PC로 확인하세요.",
+        foot_bank:"PHK Bank",
+        foot_global:"PHK Global",
+        foot_email:"메일"
+      },
+
+      ar: {
+        dir: "rtl",
+        top_sub: "النظام أولاً · الثقة أولاً · الربح لاحقاً",
+        kicker: "البيان الرسمي الأساسي",
+        hero_title: "PHK Bank هو نظام.",
+        hero_lead: "نحن لا نعطي الأولوية للربح قصير المدى. الربح يأتي بعد اكتمال البنية. نبني نظاماً مالياً موثوقاً مرتبطاً بالصناعات الحقيقية.",
+        pill1:"الربح لاحقاً", pill2:"البنية أولاً", pill3:"الثقة أولاً", pill4:"إطار عالمي",
+        mini1_title:"القاعدة الأساسية", mini1_body:"«الربح نتيجة وليس هدفاً»",
+        mini2_title:"توحيد العلامة", mini2_body:"تم دمج PWB Global رسمياً ضمن PHK Global.",
+        mini3_title:"تركيز النظام", mini3_body:"التمويل + الروبوتات + الطاقة + الفضاء ضمن هيكل واحد.",
+        mini4_title:"البريد الرسمي", mini4_body:"info@phk.global · info@phkbank.global",
+        email_notice_b:"لا تظهر الرسائل على الهاتف؟",
+        email_notice_t:"تحقق من البريد غير الهام/العروض وفعّل المزامنة. للرسائل العاجلة، أكد عبر الويب أو الكمبيوتر.",
+        quick_kicker:"ملخص سريع",
+        quick_title:"PHK Global = الإطار العالمي",
+        quick_lead:"PHK Global هو إطار التوسع والحوكمة المرتكز على PHK Bank. جميع الوثائق/التطبيقات/المشاريع العالمية موحّدة تحت PHK Global.",
+        badge_main:"الرئيسي: PHK Bank",
+        badge_frame:"الإطار: PHK Global",
+        badge_stop:"إيقاف: اسم PWB Global",
+        quick_list:[
+          "بنية تحتية مالية عالمية وتصميم الاستقرار",
+          "إطار توزيع مستدام جاهز لـ UBI",
+          "تكامل مع الصناعات الحقيقية (الروبوتات/الطاقة/الفضاء)",
+          "علامة عالمية موحّدة: PHK Global"
+        ],
+        cta:"تواصل / البريد الرسمي",
+        bank_kicker:"PHK Bank",
+        bank_title:"الربح هو الخطوة التالية.",
+        bank_lead:"يعطي PHK Bank الأولوية للبنية والحوكمة والثقة. نبني نظاماً قابلاً للتوسع من المدن إلى الدول.",
+        bank_h3:"الأهداف الأساسية",
+        bank_list:[
+          "بناء بنية تحتية مالية عالمية",
+          "تصميم إطار الاستقرار للمدن والصناعات والدول",
+          "تمكين نماذج توزيع جاهزة لـ UBI",
+          "ربط التمويل بالإنتاج والخدمات الفعلية"
+        ],
+        bank_note:"البيان: «لا نطارد الربح أولاً. نُكمل النظام أولاً.»",
+        global_kicker:"PHK Global",
+        global_title:"PWB Global → PHK Global",
+        global_lead:"تم دمج PWB Global رسمياً ضمن PHK Global، ولم يعد اسم PWB Global مستخدماً.",
+        global_h3:"دور PHK Global",
+        global_list:[
+          "مركز التوسع العالمي لـ PHK Bank",
+          "حوكمة وتوحيد الوثائق والتطبيقات والمشاريع",
+          "ربط الروبوتات وطاقة الاندماج وصناعة الفضاء بالتمويل",
+          "تنسيق الشراكات الدولية والبرامج على مستوى الدول"
+        ],
+        global_note:"كل العمليات العالمية موحّدة تحت PHK Global. إطار واحد. صوت واحد.",
+        contact_kicker:"تواصل",
+        contact_title:"البريد الرسمي",
+        contact_lead:"استخدم رسائل البريد الرسمية أدناه. إذا لم تظهر على الهاتف، تحقق من التصنيفات وفعّل المزامنة أو استخدم الويب/الكمبيوتر.",
+        foot_bank:"PHK Bank",
+        foot_global:"PHK Global",
+        foot_email:"البريد"
+      },
+
+      zh: {
+        dir: "ltr",
+        top_sub: "结构优先 · 信任优先 · 利润其后",
+        kicker: "官方核心声明",
+        hero_title: "PHK Bank 是一个“系统”。",
+        hero_lead: "我们不把短期利润放在第一位。利润是在结构完善之后自然产生的结果。我们建设与实体产业相连接的可信金融体系。",
+        pill1:"利润其后", pill2:"结构优先", pill3:"信任优先", pill4:"全球框架",
+        mini1_title:"核心原则", mini1_body:"“利润是结果，而不是目标。”",
+        mini2_title:"品牌统一", mini2_body:"PWB Global 已正式并入 PHK Global。",
+        mini3_title:"系统聚焦", mini3_body:"金融 + 机器人 + 能源 + 航天，一体化结构连接。",
+        mini4_title:"官方邮箱", mini4_body:"info@phk.global · info@phkbank.global",
+        email_notice_b:"手机上看不到邮件？",
+        email_notice_t:"请检查垃圾邮件/推广分类，并确认邮箱同步已开启。紧急邮件建议用网页或电脑确认。",
+        quick_kicker:"快速摘要",
+        quick_title:"PHK Global = 全球扩张框架",
+        quick_lead:"PHK Global 是以 PHK Bank 为中心的全球扩张与治理框架。所有全球文档/应用/项目统一归入 PHK Global。",
+        badge_main:"主体系：PHK Bank",
+        badge_frame:"框架：PHK Global",
+        badge_stop:"停止使用：PWB Global 名称",
+        quick_list:[
+          "全球金融基础设施与稳定性设计",
+          "UBI（基本收入）可持续分配框架",
+          "实体产业融合（机器人/能源/航天）",
+          "全球品牌统一：PHK Global"
+        ],
+        cta:"联系 / 官方邮箱",
+        bank_kicker:"PHK Bank",
+        bank_title:"利润是下一步。",
+        bank_lead:"PHK Bank 优先结构、治理与信任。我们建设可从城市扩展到国家层级的金融系统。",
+        bank_h3:"主要目标",
+        bank_list:[
+          "建设全球金融基础设施",
+          "城市/产业/国家层级稳定框架设计",
+          "UBI（基本收入）模型准备",
+          "金融与实体生产/服务直接连接"
+        ],
+        bank_note:"声明：“不先追逐利润，先完成系统。”",
+        global_kicker:"PHK Global",
+        global_title:"PWB Global → PHK Global",
+        global_lead:"原 PWB Global 已正式并入 PHK Global，PWB Global 名称不再使用。",
+        global_h3:"PHK Global 职能",
+        global_list:[
+          "PHK Bank 全球扩张枢纽",
+          "统一治理文档/应用/项目",
+          "连接机器人·核聚变能源·航天产业与金融",
+          "协调国际合作与国家级项目"
+        ],
+        global_note:"所有全球运营统一归入 PHK Global：一个框架，一个声音。",
+        contact_kicker:"联系",
+        contact_title:"官方邮箱",
+        contact_lead:"请使用以下官方邮箱。若手机未显示，请检查分类/同步设置或用网页/电脑确认。",
+        foot_bank:"PHK Bank",
+        foot_global:"PHK Global",
+        foot_email:"邮箱"
+      }
+    };
+
+    function applyLang(lang){
+      const dict = i18n[lang] || i18n.en;
+
+      // direction
+      document.documentElement.dir = dict.dir;
+      document.body.classList.toggle("rtl", dict.dir === "rtl");
+
+      // set rtl class on key blocks for better alignment
+      const rtlOn = dict.dir === "rtl";
+      const blocks = ["hero_title","hero_lead","kicker","top_sub","quick_title","quick_lead","bank_title","bank_lead","global_title","global_lead","contact_title","contact_lead"];
+      blocks.forEach(id=>{
+        const el = document.getElementById(id);
+        if(el){
+          el.classList.toggle("rtl", rtlOn);
         }
-      };
+      });
 
-      const langBtn = document.getElementById("langBtn");
-      const langMenu = document.getElementById("langMenu");
-      const langLabel= document.getElementById("langLabel");
+      // simple text mapping
+      const map = [
+        ["top_sub", dict.top_sub],
+        ["kicker", dict.kicker],
+        ["hero_title", dict.hero_title],
+        ["hero_lead", dict.hero_lead],
+        ["pill1", dict.pill1], ["pill2", dict.pill2], ["pill3", dict.pill3], ["pill4", dict.pill4],
+        ["mini1_title", dict.mini1_title], ["mini1_body", dict.mini1_body],
+        ["mini2_title", dict.mini2_title], ["mini2_body", dict.mini2_body],
+        ["mini3_title", dict.mini3_title], ["mini3_body", dict.mini3_body],
+        ["mini4_title", dict.mini4_title], ["mini4_body", dict.mini4_body],
+        ["email_notice_b", dict.email_notice_b],
+        ["email_notice_t", dict.email_notice_t],
+        ["quick_kicker", dict.quick_kicker],
+        ["quick_title", dict.quick_title],
+        ["quick_lead", dict.quick_lead],
+        ["badge_main", dict.badge_main],
+        ["badge_frame", dict.badge_frame],
+        ["badge_stop", dict.badge_stop],
+        ["cta", dict.cta],
+        ["bank_kicker", dict.bank_kicker],
+        ["bank_title", dict.bank_title],
+        ["bank_lead", dict.bank_lead],
+        ["bank_h3", dict.bank_h3],
+        ["bank_note", dict.bank_note],
+        ["global_kicker", dict.global_kicker],
+        ["global_title", dict.global_title],
+        ["global_lead", dict.global_lead],
+        ["global_h3", dict.global_h3],
+        ["global_note", dict.global_note],
+        ["contact_kicker", dict.contact_kicker],
+        ["contact_title", dict.contact_title],
+        ["contact_lead", dict.contact_lead],
+        ["foot_bank", dict.foot_bank],
+        ["foot_global", dict.foot_global],
+        ["foot_email", dict.foot_email]
+      ];
+      map.forEach(([id, text])=>{
+        const el = document.getElementById(id);
+        if(el && typeof text === "string") el.textContent = text;
+      });
 
-      function setHTML(id, v){ const el=document.getElementById(id); if(el) el.innerHTML=v; }
-      function setText(id, v){ const el=document.getElementById(id); if(el) el.textContent=v; }
-
-      function apply(lang){
-        const d = T[lang] || T.ko;
-
-        langLabel.textContent = d.langLabel;
-        setText("t_tagline", d.tagline);
-        setText("t_motto", d.motto);
-
-        setHTML("t_coreTitle", d.coreTitle);
-
-        setText("t_ubi_title", d.ubi_title);
-        setText("t_ubi_sub", d.ubi_sub);
-        setText("t_ubi_desc", d.ubi_desc);
-
-        setText("t_pay_title", d.pay_title);
-        setText("t_pay_sub", d.pay_sub);
-        setText("t_pay_desc", d.pay_desc);
-
-        setText("t_apy_title", d.apy_title);
-        setText("t_apy_sub", d.apy_sub);
-        setText("t_apy_desc", d.apy_desc);
-
-        setText("t_reward_title", d.reward_title);
-        setText("t_reward_sub", d.reward_sub);
-        setText("t_reward_desc", d.reward_desc);
-
-        setText("t_external", d.external);
-
-        setText("t_youtube_sub", d.youtube_sub);
-        setText("t_tiktok_sub", d.tiktok_sub);
-
-        setHTML("t_frameTitle", d.frameTitle);
-
-        setText("t_fw_title", d.fw_title);
-        setText("t_fw_sub", d.fw_sub);
-        setText("t_fw_desc", d.fw_desc);
-
-        setText("t_ge_title", d.ge_title);
-        setText("t_ge_sub", d.ge_sub);
-        setText("t_ge_desc", d.ge_desc);
-
-        // PHK Global (PWB Global -> PHK Global)
-        setText("t_pg_title", d.pg_title);
-        setText("t_pg_sub", d.pg_sub);
-        setText("t_pg_desc", d.pg_desc);
-
-        setText("t_contactTitle", d.contactTitle);
-        setText("t_emailLabel", d.emailLabel);
-        setText("t_copy", d.copy);
-
-        // RTL
-        document.documentElement.lang = lang;
-        document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-
-        // active menu
-        langMenu.querySelectorAll("button").forEach(b=>{
-          b.classList.toggle("active", b.dataset.lang === lang);
+      // lists
+      function fillList(id, items){
+        const ul = document.getElementById(id);
+        if(!ul || !Array.isArray(items)) return;
+        ul.innerHTML = "";
+        items.forEach(t=>{
+          const li = document.createElement("li");
+          li.textContent = t;
+          ul.appendChild(li);
         });
-
-        localStorage.setItem("phkbank_lang", lang);
+        ul.classList.toggle("rtl", rtlOn);
       }
+      fillList("quick_list", dict.quick_list);
+      fillList("bank_list", dict.bank_list);
+      fillList("global_list", dict.global_list);
 
-      function toggleMenu(force){
-        const willShow = (typeof force === "boolean") ? force : !langMenu.classList.contains("show");
-        langMenu.classList.toggle("show", willShow);
-        langBtn.setAttribute("aria-expanded", willShow ? "true" : "false");
-      }
+      // Top buttons label
+      document.getElementById("btn_phkglobal").textContent = dict.foot_global || "PHK Global";
+      document.getElementById("btn_phkbank").textContent = dict.foot_bank || "PHK Bank";
+      document.getElementById("btn_email").textContent = "info@phk.global";
+    }
 
-      langBtn.addEventListener("click", (e)=>{
-        e.stopPropagation();
-        toggleMenu();
-      });
+    const langSel = document.getElementById("lang");
+    langSel.addEventListener("change", e => applyLang(e.target.value));
 
-      langMenu.addEventListener("click", (e)=>{
-        const btn = e.target.closest("button[data-lang]");
-        if(!btn) return;
-        apply(btn.dataset.lang);
-        toggleMenu(false);
-      });
-
-      document.addEventListener("click", ()=> toggleMenu(false));
-
-      // Channel cards
-      document.getElementById("card_youtube").addEventListener("click", ()=>{
-        if(YOUTUBE_URL) window.open(YOUTUBE_URL, "_blank");
-      });
-      document.getElementById("card_tiktok").addEventListener("click", ()=>{
-        if(TIKTOK_URL) window.open(TIKTOK_URL, "_blank");
-      });
-
-      // Copy email
-      const emailLink = document.getElementById("emailLink");
-      emailLink.href = "mailto:" + EMAIL;
-      emailLink.textContent = EMAIL;
-
-      const toast = document.getElementById("toast");
-      const toastMsg = document.getElementById("toastMsg");
-      function showToast(msg){
-        toastMsg.textContent = msg;
-        toast.classList.add("show");
-        clearTimeout(showToast._t);
-        showToast._t = setTimeout(()=> toast.classList.remove("show"), 1600);
-      }
-
-      async function copy(text){
-        try{
-          await navigator.clipboard.writeText(text);
-          return true;
-        }catch(e){
-          const ta=document.createElement("textarea");
-          ta.value=text;
-          ta.style.position="fixed";
-          ta.style.left="-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          try{ document.execCommand("copy"); document.body.removeChild(ta); return true; }
-          catch(err){ document.body.removeChild(ta); return false; }
-        }
-      }
-
-      document.getElementById("copyBtn").addEventListener("click", async ()=>{
-        const ok = await copy(EMAIL);
-        const lang = localStorage.getItem("phkbank_lang") || "ko";
-        const d = T[lang] || T.ko;
-        showToast(ok ? d.copied : "Failed");
-      });
-
-      // Initial
-      const saved = localStorage.getItem("phkbank_lang");
-      const auto = (navigator.language || "").toLowerCase().startsWith("ar") ? "ar"
-                : (navigator.language || "").toLowerCase().startsWith("en") ? "en" : "ko";
-      apply(saved || auto);
-    })();
+    // default language (match select)
+    applyLang(langSel.value);
   </script>
 </body>
 </html>
