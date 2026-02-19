@@ -1,487 +1,362 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HKBank</title>
-  <meta name="description" content="HKBank — ONE WORLD · ONE PI · ONE FUTURE" />
-  <style>
-    :root{
-      --bg:#070a12;
-      --card:#0f172a;
-      --card2:#0b1224;
-      --line:rgba(255,255,255,.10);
-      --text:#eaf0ff;
-      --muted:rgba(234,240,255,.62);
-      --muted2:rgba(234,240,255,.42);
-      --accent:#ffcc4d;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius:22px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Apple SD Gothic Neo, "Noto Sans KR", sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(900px 520px at 20% -10%, rgba(120,140,255,.22), transparent 60%),
-        radial-gradient(700px 520px at 90% 8%, rgba(255,90,120,.12), transparent 55%),
-        radial-gradient(800px 520px at 50% 110%, rgba(255,200,80,.10), transparent 55%),
-        var(--bg);
-    }
-    .wrap{max-width: 420px; margin: 0 auto; padding: 18px 14px 26px}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HK-BANK | Global Digital Financial Institution</title>
 
-    /* Top bar */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; padding: 10px 10px 16px;
-      opacity:.92;
-    }
-    .brandRow{display:flex; align-items:center; gap:10px}
-    .dot{
-      width:16px; height:16px; border-radius:999px;
-      background:rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.14);
-    }
-    .brandName{font-weight:800; letter-spacing:.2px}
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#0a0f1c;
+color:white;
+line-height:1.8;
+}
+header{
+background:linear-gradient(135deg,#001f3f,#003366,#004080);
+padding:80px 20px;
+text-align:center;
+}
+header h1{
+font-size:60px;
+letter-spacing:4px;
+margin-bottom:15px;
+color:#66ccff;
+}
+header p{
+font-size:22px;
+opacity:0.9;
+}
+nav{
+background:#001a33;
+padding:15px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:999;
+}
+nav button{
+margin:6px;
+padding:10px 20px;
+border:none;
+background:#66ccff;
+color:black;
+font-weight:bold;
+border-radius:5px;
+cursor:pointer;
+}
+nav button:hover{background:#99ddff;}
+.section{
+padding:80px 10%;
+}
+.section h2{
+font-size:38px;
+margin-bottom:25px;
+color:#66ccff;
+}
+.section h3{
+margin-top:25px;
+margin-bottom:15px;
+color:#aaddff;
+}
+ul{margin-left:20px;margin-top:10px;}
+footer{
+background:black;
+text-align:center;
+padding:50px;
+margin-top:80px;
+font-size:14px;
+opacity:0.8;
+}
+.lang{display:none;}
+</style>
 
-    .langSelect{
-      display:flex; align-items:center; gap:8px;
-      border:1px solid var(--line);
-      background: rgba(15,23,42,.55);
-      padding:10px 12px;
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      cursor:pointer;
-      user-select:none;
-      min-width: 120px;
-      justify-content: space-between;
-    }
-    .langSelect span{font-weight:800}
-    .caret{
-      width:0; height:0;
-      border-left:6px solid transparent; border-right:6px solid transparent;
-      border-top:7px solid rgba(234,240,255,.70);
-      transform: translateY(1px);
-    }
-
-    /* Hero */
-    .hero{
-      margin-top: 6px;
-      text-align:center;
-      padding: 18px 10px 10px;
-    }
-    .appIcon{
-      width:86px; height:86px; border-radius:26px;
-      margin: 0 auto 16px;
-      display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(255,195,80,.95), rgba(165,110,255,.92), rgba(80,150,255,.92));
-      box-shadow: 0 18px 55px rgba(0,0,0,.55);
-      position: relative;
-      overflow:hidden;
-    }
-    .appIcon::after{
-      content:"";
-      position:absolute; inset:-40px;
-      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 45%);
-      transform: rotate(12deg);
-    }
-    .piMark{
-      position:relative;
-      font-weight:900;
-      font-size:36px;
-      color: rgba(255,255,255,.92);
-      letter-spacing:-1px;
-      text-shadow: 0 8px 22px rgba(0,0,0,.35);
-    }
-    h1{
-      margin: 0;
-      font-size: 44px;
-      letter-spacing: .5px;
-      font-weight: 900;
-    }
-    .tagline{
-      margin-top: 10px;
-      font-size: 14px;
-      letter-spacing: .35em;
-      color: rgba(234,240,255,.58);
-    }
-    /* 요청: 이유 => 이윤 */
-    .slogan{
-      margin-top: 22px;
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing:-.3px;
-    }
-
-    /* Section label */
-    .sectionLabel{
-      margin: 18px 8px 12px;
-      color: rgba(234,240,255,.70);
-      font-weight: 800;
-      letter-spacing:.2px;
-      text-align:left;
-    }
-
-    /* Cards */
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(15,23,42,.82), rgba(11,18,36,.70));
-      box-shadow: var(--shadow);
-      padding: 18px 18px 16px;
-      position: relative;
-      overflow:hidden;
-      margin-bottom: 16px;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-40px;
-      background:
-        radial-gradient(520px 240px at 20% 0%, rgba(120,140,255,.20), transparent 60%),
-        radial-gradient(520px 240px at 100% 30%, rgba(255,200,80,.10), transparent 60%);
-      pointer-events:none;
-    }
-    .cardTitle{
-      position:relative;
-      font-size: 28px;
-      font-weight: 900;
-      margin: 2px 0 12px;
-      letter-spacing:-.2px;
-    }
-    .cardSub{
-      position:relative;
-      color: rgba(234,240,255,.60);
-      font-size: 15px;
-      font-weight: 700;
-      margin: 0 0 14px;
-    }
-    .cardMeta{
-      position:relative;
-      color: rgba(234,240,255,.46);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    /* External Channels */
-    .dividerText{
-      text-align:center;
-      margin: 8px 0 14px;
-      color: rgba(234,240,255,.34);
-      letter-spacing:.06em;
-      font-size: 13px;
-    }
-
-    /* Footer (스크샷 느낌) */
-    .footer{
-      text-align:center;
-      margin-top: 18px;
-      color: rgba(234,240,255,.34);
-      font-size: 12px;
-      line-height: 1.6;
-      padding-bottom: 6px;
-    }
-
-    /* Floating button (우측 하단 원형) */
-    .fab{
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      width: 58px;
-      height: 58px;
-      border-radius: 999px;
-      border: 2px solid rgba(255,205,77,.95);
-      background: rgba(12,18,34,.72);
-      backdrop-filter: blur(10px);
-      display:grid;
-      place-items:center;
-      box-shadow: 0 18px 55px rgba(0,0,0,.55);
-      cursor:pointer;
-      user-select:none;
-      z-index: 60;
-    }
-    .fab span{
-      font-weight: 1000;
-      color: rgba(255,205,77,.95);
-      font-size: 22px;
-      letter-spacing:-.5px;
-    }
-
-    /* Language menu */
-    .menu{
-      position: fixed;
-      top: 64px;
-      right: 14px;
-      width: 175px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(15,23,42,.90);
-      box-shadow: var(--shadow);
-      padding: 8px;
-      display:none;
-      z-index: 80;
-      backdrop-filter: blur(10px);
-    }
-    .menu button{
-      width:100%;
-      text-align:left;
-      border:0;
-      background: transparent;
-      color: rgba(234,240,255,.92);
-      padding: 10px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight: 800;
-    }
-    .menu button:hover{background: rgba(255,255,255,.06)}
-    .menu small{display:block;color:rgba(234,240,255,.55);font-weight:600;margin-top:2px}
-
-    /* Contact badge */
-    .contact{
-      margin-top: 10px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(10,16,32,.45);
-      color: rgba(234,240,255,.66);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-    .email{
-      color: rgba(234,240,255,.92);
-      font-weight: 900;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      letter-spacing:.2px;
-    }
-  </style>
+<script>
+function changeLang(lang){
+document.querySelectorAll(".lang").forEach(el=>el.style.display="none");
+document.getElementById(lang).style.display="block";
+}
+</script>
 </head>
 
-<body>
-  <div class="wrap">
-    <!-- top -->
-    <div class="topbar">
-      <div class="brandRow">
-        <div class="dot"></div>
-        <div class="brandName">HKBank</div>
-      </div>
+<body onload="changeLang('en')">
 
-      <div class="langSelect" id="langBtn" aria-label="language">
-        <span id="langLabel">한국어</span>
-        <div class="caret"></div>
-      </div>
-    </div>
+<header>
+<h1>HK-BANK</h1>
+<p>Global Finance • Digital Banking • Secure Innovation</p>
+</header>
 
-    <!-- hero -->
-    <section class="hero">
-      <div class="appIcon" aria-hidden="true">
-        <div class="piMark">π</div>
-      </div>
+<nav>
+<button onclick="changeLang('en')">English</button>
+<button onclick="changeLang('kr')">한국어</button>
+<button onclick="changeLang('cn')">中文</button>
+<button onclick="changeLang('ar')">العربية</button>
+</nav>
 
-      <h1>HKBank</h1>
-      <div class="tagline">ONE WORLD · ONE PI · ONE FUTURE</div>
+<!-- ================= ENGLISH ================= -->
+<div id="en" class="lang">
 
-      <!-- 요청: 이유 => 이윤 -->
-      <div class="slogan" id="sloganText">사람이 먼저, 이윤은 그 다음</div>
-    </section>
+<div class="section">
+<h2>About HK-BANK</h2>
+<p>
+HK-BANK is a next-generation global financial institution delivering
+secure, innovative, and fully digital banking services.
+We combine traditional banking strength with advanced fintech infrastructure.
+</p>
+</div>
 
-    <!-- Core -->
-    <div class="sectionLabel" id="coreLabel">HKBank Core · 실행 영역</div>
+<div class="section">
+<h2>Core Services</h2>
 
-    <section class="card">
-      <div class="cardTitle" id="c1Title">기본소득</div>
-      <div class="cardSub" id="c1Sub">기본소득 리워드</div>
-      <div class="cardMeta" id="c1Meta">정기 지급 · 참여 기반 · 생태계 환원</div>
-    </section>
+<h3>Retail Banking</h3>
+<p>Savings accounts, checking accounts, debit and credit services.</p>
 
-    <section class="card">
-      <div class="cardTitle" id="c2Title">결제</div>
-      <div class="cardSub" id="c2Sub">결제 · 송금</div>
-      <div class="cardMeta" id="c2Meta">결제 · 송금 · 정산 · 가치 이전</div>
-    </section>
+<h3>Corporate Banking</h3>
+<p>Business loans, trade finance, treasury management solutions.</p>
 
-    <section class="card">
-      <div class="cardTitle" id="c3Title">예치율</div>
-      <div class="cardSub" id="c3Sub">31.4% APY (데모)</div>
-      <div class="cardMeta" id="c3Meta">안정성 · 유동성 · 장기 운영</div>
-    </section>
+<h3>Digital Banking Platform</h3>
+<p>AI-driven mobile banking, biometric security, blockchain integration.</p>
 
-    <section class="card">
-      <div class="cardTitle" id="c4Title">보상</div>
-      <div class="cardSub" id="c4Sub">참여 · 기여 기반</div>
-      <div class="cardMeta" id="c4Meta">활동 기록 · 기여 평가 · 보상 분배</div>
-    </section>
+<h3>Investment & Wealth Management</h3>
+<p>Asset management, portfolio advisory, global investment access.</p>
 
-    <div class="dividerText" id="extLabel">External Channels</div>
+<h3>International Finance</h3>
+<p>Cross-border payments, multi-currency accounts, global settlements.</p>
 
-    <section class="card" id="ytCard" role="button" tabindex="0">
-      <div class="cardTitle">YouTube</div>
-      <div class="cardSub">HKBank 공식 영상 채널</div>
-    </section>
+</div>
 
-    <section class="card" id="ttCard" role="button" tabindex="0">
-      <div class="cardTitle">TikTok</div>
-      <div class="cardSub">HKBank 공식 틱톡 채널</div>
-    </section>
+<div class="section">
+<h2>Security & Compliance</h2>
+<ul>
+<li>Advanced encryption infrastructure</li>
+<li>Real-time fraud monitoring systems</li>
+<li>Global regulatory compliance</li>
+<li>Cybersecurity AI protection</li>
+</ul>
+</div>
 
-    <!-- Framework -->
-    <div class="sectionLabel" id="fwLabel">HKBank Framework · 구조 영역</div>
+<div class="section">
+<h2>Technology Innovation</h2>
+<p>
+HK-BANK integrates AI, blockchain, quantum-resistant encryption,
+and cloud-native infrastructure to redefine modern banking.
+</p>
+</div>
 
-    <section class="card">
-      <div class="cardTitle">HKBank Framework</div>
-      <div class="cardSub">HKBank는 단순 금융 앱이 아니라 결제·산업·기술·UBI를 통합하는 금융 운영체계(OS)입니다.</div>
-      <div class="cardMeta">금융 OS · 구조 설계 · 장기 확장</div>
-    </section>
+<div class="section">
+<h2>Vision</h2>
+<p>
+To become a leading digital-first global bank,
+empowering individuals and businesses worldwide
+with secure and intelligent financial solutions.
+</p>
+</div>
 
-    <section class="card">
-      <div class="cardTitle">Global Expansion</div>
-      <div class="cardSub">HKBank는 국가 단위를 넘어 글로벌 결제·정산·산업 연동 구조로 확장됩니다.</div>
-      <div class="cardMeta">국제 연동 · 파트너십 · 확장 구조</div>
-    </section>
+<div class="section">
+<h2>Contact</h2>
+<p>Email: info@hkbank.com</p>
+</div>
 
-    <!-- 요청: PWB => HK -->
-    <section class="card">
-      <div class="cardTitle">HK Global</div>
-      <div class="cardSub">HKBank의 하위 글로벌 확장 프레임으로, 국제 금융·산업·UBI 구조를 담당합니다.</div>
-      <div class="cardMeta">Sub Framework</div>
-    </section>
+</div>
 
-    <div class="footer">
-      © <span id="year"></span> HKBank<br/>
-      Financial Operating System
-    </div>
+<!-- ================= KOREAN ================= -->
+<div id="kr" class="lang">
 
-    <div class="contact">
-      문의: <span class="email" id="emailText">info@hkbank.com</span>
-    </div>
-  </div>
+<div class="section">
+<h2>HK-BANK 소개</h2>
+<p>
+HK-BANK는 디지털 금융 혁신을 기반으로 한 글로벌 금융기관입니다.
+전통 금융의 안정성과 첨단 핀테크 기술을 결합합니다.
+</p>
+</div>
 
-  <!-- language menu -->
-  <div class="menu" id="langMenu" aria-label="language menu">
-    <button data-lang="ko">한국어<small>KR</small></button>
-    <button data-lang="en">English<small>EN</small></button>
-    <button data-lang="ar">العربية<small>AR</small></button>
-  </div>
+<div class="section">
+<h2>주요 서비스</h2>
 
-  <!-- floating button -->
-  <div class="fab" id="fab" title="Top">
-    <span>t</span>
-  </div>
+<h3>개인 금융</h3>
+<p>예금, 입출금 계좌, 체크카드 및 신용카드 서비스.</p>
 
-  <script>
-    // year
-    document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("emailText").textContent = "info@phkbank.com";
+<h3>기업 금융</h3>
+<p>기업 대출, 무역 금융, 자금 관리 솔루션.</p>
 
-    // YouTube/TikTok 링크(원하시면 여기에 본인 채널 주소 넣으시면 됩니다)
-    const YT_URL = "#";
-    const TT_URL = "#";
-    const ytCard = document.getElementById("ytCard");
-    const ttCard = document.getElementById("ttCard");
-    function openLink(url){
-      if(!url || url === "#") return;
-      window.open(url, "_blank");
-    }
-    ytCard.addEventListener("click", ()=>openLink(YT_URL));
-    ttCard.addEventListener("click", ()=>openLink(TT_URL));
-    ytCard.addEventListener("keydown", (e)=>{ if(e.key==="Enter") openLink(YT_URL); });
-    ttCard.addEventListener("keydown", (e)=>{ if(e.key==="Enter") openLink(TT_URL); });
+<h3>디지털 뱅킹</h3>
+<p>AI 모바일 뱅킹, 생체 인증, 블록체인 기반 시스템.</p>
 
-    // language dropdown
-    const langBtn = document.getElementById("langBtn");
-    const langMenu = document.getElementById("langMenu");
-    const langLabel = document.getElementById("langLabel");
+<h3>투자 및 자산 관리</h3>
+<p>자산 운용, 포트폴리오 자문, 글로벌 투자 접근.</p>
 
-    langBtn.addEventListener("click", ()=>{
-      langMenu.style.display = (langMenu.style.display === "block") ? "none" : "block";
-    });
-    document.addEventListener("click", (e)=>{
-      if(!langMenu.contains(e.target) && !langBtn.contains(e.target)){
-        langMenu.style.display = "none";
-      }
-    });
+<h3>국제 금융</h3>
+<p>해외 송금, 다중 통화 계좌, 글로벌 결제 시스템.</p>
 
-    // i18n (스크샷 구조 유지, 문구만 최소 번역)
-    const I18N = {
-      ko:{
-        lang:"한국어",
-        slogan:"사람이 먼저, 이윤은 그 다음",
-        core:"PKBank Core · 실행 영역",
-        fw:"PKBank Framework · 구조 영역",
-        ext:"External Channels",
-        c1t:"기본소득", c1s:"기본소득 리워드", c1m:"정기 지급 · 참여 기반 · 생태계 환원",
-        c2t:"결제", c2s:"결제 · 송금", c2m:"결제 · 송금 · 정산 · 가치 이전",
-        c3t:"예치율", c3s:"31.4% APY (데모)", c3m:"안정성 · 유동성 · 장기 운영",
-        c4t:"보상", c4s:"참여 · 기여 기반", c4m:"활동 기록 · 기여 평가 · 보상 분배"
-      },
-      en:{
-        lang:"English",
-        slogan:"People first, profit comes next",
-        core:"PKBank Core · Execution Areas",
-        fw:"PKBank Framework · Architecture",
-        ext:"External Channels",
-        c1t:"UBI", c1s:"UBI Rewards", c1m:"Scheduled payouts · Participation-based · Ecosystem return",
-        c2t:"Payments", c2s:"Pay · Transfer", c2m:"Payments · Transfers · Settlement · Value transfer",
-        c3t:"Deposit Rate", c3s:"31.4% APY (Demo)", c3m:"Stability · Liquidity · Long-term operation",
-        c4t:"Rewards", c4s:"Contribution-based", c4m:"Activity log · Contribution scoring · Reward distribution"
-      },
-      ar:{
-        lang:"العربية",
-        slogan:"الإنسان أولاً، ثم الربح",
-        core:"نواة HKBank · مجالات التنفيذ",
-        fw:"إطار HKBank · البنية",
-        ext:"القنوات الخارجية",
-        c1t:"الدخل الأساسي", c1s:"مكافآت الدخل الأساسي", c1m:"مدفوعات دورية · مشاركة · عائد للنظام البيئي",
-        c2t:"المدفوعات", c2s:"دفع · تحويل", c2m:"مدفوعات · تحويلات · تسوية · نقل قيمة",
-        c3t:"معدل الإيداع", c3s:"31.4% APY (تجريبي)", c3m:"استقرار · سيولة · تشغيل طويل الأجل",
-        c4t:"المكافآت", c4s:"على أساس المساهمة", c4m:"سجل النشاط · تقييم المساهمة · توزيع المكافآت"
-      }
-    };
+</div>
 
-    function setLang(code){
-      const t = I18N[code] || I18N.ko;
-      langLabel.textContent = t.lang;
-      document.getElementById("sloganText").textContent = t.slogan;
+<div class="section">
+<h2>보안 및 규정 준수</h2>
+<ul>
+<li>고급 암호화 인프라</li>
+<li>실시간 사기 탐지 시스템</li>
+<li>글로벌 금융 규정 준수</li>
+<li>AI 기반 사이버 보안</li>
+</ul>
+</div>
 
-      document.getElementById("coreLabel").textContent = t.core;
-      document.getElementById("fwLabel").textContent = t.fw;
-      document.getElementById("extLabel").textContent = t.ext;
+<div class="section">
+<h2>기술 혁신</h2>
+<p>
+AI, 블록체인, 양자 내성 암호화 기술을 통합하여
+차세대 디지털 금융을 구현합니다.
+</p>
+</div>
 
-      document.getElementById("c1Title").textContent = t.c1t;
-      document.getElementById("c1Sub").textContent = t.c1s;
-      document.getElementById("c1Meta").textContent = t.c1m;
+<div class="section">
+<h2>비전</h2>
+<p>
+전 세계 개인과 기업을 위한
+안전하고 지능적인 금융 플랫폼이 되는 것.
+</p>
+</div>
 
-      document.getElementById("c2Title").textContent = t.c2t;
-      document.getElementById("c2Sub").textContent = t.c2s;
-      document.getElementById("c2Meta").textContent = t.c2m;
+<div class="section">
+<h2>문의</h2>
+<p>이메일: info@hkbank.com</p>
+</div>
 
-      document.getElementById("c3Title").textContent = t.c3t;
-      document.getElementById("c3Sub").textContent = t.c3s;
-      document.getElementById("c3Meta").textContent = t.c3m;
+</div>
 
-      document.getElementById("c4Title").textContent = t.c4t;
-      document.getElementById("c4Sub").textContent = t.c4s;
-      document.getElementById("c4Meta").textContent = t.c4m;
+<!-- ================= CHINESE ================= -->
+<div id="cn" class="lang">
 
-      document.documentElement.lang = (code === "ar") ? "ar" : (code === "en") ? "en" : "ko";
-      document.documentElement.dir = (code === "ar") ? "rtl" : "ltr";
-    }
+<div class="section">
+<h2>关于 HK-BANK</h2>
+<p>
+HK-BANK 是一家新一代全球金融机构，
+融合传统银行实力与先进金融科技平台。
+</p>
+</div>
 
-    document.querySelectorAll("#langMenu button").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        setLang(btn.dataset.lang);
-        langMenu.style.display = "none";
-      });
-    });
+<div class="section">
+<h2>核心服务</h2>
 
-    // floating button: scroll top
-    document.getElementById("fab").addEventListener("click", ()=>{
-      window.scrollTo({top:0, behavior:"smooth"});
-    });
+<h3>个人银行</h3>
+<p>储蓄账户、信用卡、借记卡等服务。</p>
 
-    // init
-    setLang("ko");
-  </script>
+<h3>企业银行</h3>
+<p>企业贷款、贸易融资、资金管理。</p>
+
+<h3>数字银行平台</h3>
+<p>AI移动银行、生物识别安全、区块链整合。</p>
+
+<h3>投资与财富管理</h3>
+<p>资产管理、投资组合咨询、全球投资渠道。</p>
+
+<h3>国际金融</h3>
+<p>跨境支付、多币种账户、全球结算系统。</p>
+
+</div>
+
+<div class="section">
+<h2>安全与合规</h2>
+<ul>
+<li>高级加密系统</li>
+<li>实时反欺诈监控</li>
+<li>全球监管合规</li>
+<li>AI 网络安全保护</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>技术创新</h2>
+<p>
+整合人工智能、区块链与量子安全加密技术，
+打造未来数字金融平台。
+</p>
+</div>
+
+<div class="section">
+<h2>愿景</h2>
+<p>
+成为全球领先的数字化银行，
+为个人与企业提供安全智能的金融解决方案。
+</p>
+</div>
+
+<div class="section">
+<h2>联系</h2>
+<p>邮箱: info@hkbank.com</p>
+</div>
+
+</div>
+
+<!-- ================= ARABIC ================= -->
+<div id="ar" class="lang" dir="rtl">
+
+<div class="section">
+<h2>حول HK-BANK</h2>
+<p>
+HK-BANK مؤسسة مالية عالمية حديثة
+تجمع بين قوة البنوك التقليدية وتقنيات التكنولوجيا المالية المتقدمة.
+</p>
+</div>
+
+<div class="section">
+<h2>الخدمات الأساسية</h2>
+
+<h3>الخدمات المصرفية للأفراد</h3>
+<p>حسابات توفير وجارية وبطاقات ائتمان.</p>
+
+<h3>الخدمات المصرفية للشركات</h3>
+<p>قروض تجارية وتمويل التجارة وإدارة السيولة.</p>
+
+<h3>المنصة الرقمية</h3>
+<p>خدمات مصرفية عبر الهاتف، أمان بيومتري، وتقنية بلوكتشين.</p>
+
+<h3>الاستثمار وإدارة الثروات</h3>
+<p>إدارة الأصول والاستشارات الاستثمارية.</p>
+
+<h3>التمويل الدولي</h3>
+<p>تحويلات عبر الحدود وحسابات متعددة العملات.</p>
+
+</div>
+
+<div class="section">
+<h2>الأمن والامتثال</h2>
+<ul>
+<li>تشفير متقدم</li>
+<li>مراقبة فورية للاحتيال</li>
+<li>الامتثال للوائح الدولية</li>
+<li>حماية سيبرانية مدعومة بالذكاء الاصطناعي</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>الابتكار التقني</h2>
+<p>
+نستخدم الذكاء الاصطناعي وتقنيات البلوكتشين
+لبناء مستقبل الخدمات المصرفية الرقمية.
+</p>
+</div>
+
+<div class="section">
+<h2>الرؤية</h2>
+<p>
+أن نصبح بنكاً رقمياً عالمياً رائداً
+يقدم حلولاً مالية آمنة وذكية للجميع.
+</p>
+</div>
+
+<div class="section">
+<h2>اتصل بنا</h2>
+<p>البريد الإلكتروني: info@hkbank.com</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 HK-BANK. All Rights Reserved.
+<br>
+info@hkbank.com
+</footer>
+
 </body>
 </html>
