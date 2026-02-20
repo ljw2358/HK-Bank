@@ -3,360 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HK-BANK | Global Digital Financial Institution</title>
+<title>HK PHONE | The Future of Communication</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
 body{
-font-family:Arial, Helvetica, sans-serif;
-background:#0a0f1c;
-color:white;
-line-height:1.8;
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:radial-gradient(circle at top,#0b1020,#000000 70%);
+color:#e8f1ff;
+overflow-x:hidden;
 }
-header{
-background:linear-gradient(135deg,#001f3f,#003366,#004080);
-padding:80px 20px;
-text-align:center;
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 30px;
+animation:fadeIn 1.5s ease-in-out;
 }
-header h1{
-font-size:60px;
+
+h1{
+font-size:58px;
+color:#00f0ff;
 letter-spacing:4px;
-margin-bottom:15px;
-color:#66ccff;
+text-shadow:0 0 30px rgba(0,240,255,0.7);
+margin-bottom:10px;
 }
-header p{
-font-size:22px;
-opacity:0.9;
+
+h2{
+color:#7fdfff;
+margin-top:50px;
 }
-nav{
-background:#001a33;
-padding:15px;
-text-align:center;
-position:sticky;
-top:0;
-z-index:999;
+
+p{
+line-height:1.9;
+font-size:18px;
 }
-nav button{
-margin:6px;
-padding:10px 20px;
-border:none;
-background:#66ccff;
-color:black;
-font-weight:bold;
-border-radius:5px;
+
+.buttons{
+position:fixed;
+top:20px;
+right:20px;
+}
+
+button{
+background:transparent;
+border:1px solid #00f0ff;
+color:#00f0ff;
+padding:8px 16px;
+margin-left:8px;
 cursor:pointer;
+transition:0.3s;
 }
-nav button:hover{background:#99ddff;}
-.section{
-padding:80px 10%;
+
+button:hover{
+background:#00f0ff;
+color:#000;
+box-shadow:0 0 20px #00f0ff;
 }
-.section h2{
-font-size:38px;
-margin-bottom:25px;
-color:#66ccff;
+
+.glow-line{
+height:2px;
+width:100%;
+background:linear-gradient(90deg,transparent,#00f0ff,transparent);
+margin:40px 0;
+animation:slide 4s infinite linear;
 }
-.section h3{
-margin-top:25px;
-margin-bottom:15px;
-color:#aaddff;
-}
-ul{margin-left:20px;margin-top:10px;}
-footer{
-background:black;
-text-align:center;
-padding:50px;
+
+.footer{
 margin-top:80px;
 font-size:14px;
-opacity:0.8;
+opacity:0.6;
 }
-.lang{display:none;}
-</style>
 
-<script>
-function changeLang(lang){
-document.querySelectorAll(".lang").forEach(el=>el.style.display="none");
-document.getElementById(lang).style.display="block";
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
-</script>
+
+@keyframes slide{
+0%{background-position:-500px;}
+100%{background-position:500px;}
+}
+</style>
 </head>
 
-<body onload="changeLang('en')">
+<body>
 
-<header>
-<h1>HK-BANK</h1>
-<p>Global Finance • Digital Banking • Secure Innovation</p>
-</header>
+<div class="buttons">
+<button onclick="setLang('en')">English</button>
+<button onclick="setLang('ko')">한국어</button>
+<button onclick="setLang('zh')">中文</button>
+<button onclick="setLang('ar')">العربية</button>
+</div>
 
-<nav>
-<button onclick="changeLang('en')">English</button>
-<button onclick="changeLang('kr')">한국어</button>
-<button onclick="changeLang('cn')">中文</button>
-<button onclick="changeLang('ar')">العربية</button>
-</nav>
+<div class="container" id="content"></div>
 
-<!-- ================= ENGLISH ================= -->
-<div id="en" class="lang">
+<script>
 
-<div class="section">
-<h2>About HK-BANK</h2>
+const translations = {
+
+en: `
+<h1>HK PHONE</h1>
+<p><strong>Beyond Smartphones. A New Communication Paradigm.</strong></p>
+<div class="glow-line"></div>
+
+<h2>Overview</h2>
+<p>HK PHONE is a next-generation intelligent communication device integrating satellite connectivity, quantum-grade encryption, AI-driven personal systems, and global smart infrastructure compatibility.</p>
+
+<h2>Core Technologies</h2>
 <p>
-HK-BANK is a next-generation global financial institution delivering
-secure, innovative, and fully digital banking services.
-We combine traditional banking strength with advanced fintech infrastructure.
+• Satellite & Space Network Connectivity<br>
+• Quantum-Secure Communication Protocols<br>
+• AI Integrated Neural Assistant<br>
+• Advanced Energy-Efficient Chipset<br>
+• Smart City & IoT Ecosystem Integration
 </p>
-</div>
 
-<div class="section">
-<h2>Core Services</h2>
+<h2>Strategic Vision 2035</h2>
+<p>To eliminate communication barriers by creating a unified global network connecting Earth, air, and space in real time.</p>
 
-<h3>Retail Banking</h3>
-<p>Savings accounts, checking accounts, debit and credit services.</p>
+<p><strong>Investment Highlights</strong><br>
+Global telecom disruption. Secure next-gen infrastructure. Scalable hardware + platform ecosystem.</p>
 
-<h3>Corporate Banking</h3>
-<p>Business loans, trade finance, treasury management solutions.</p>
+<div class="footer">Contact: info@hkphone.com<br>© 2026 HK PHONE</div>
+`,
 
-<h3>Digital Banking Platform</h3>
-<p>AI-driven mobile banking, biometric security, blockchain integration.</p>
+ko: `
+<h1>HK PHONE</h1>
+<p><strong>스마트폰을 넘어, 새로운 통신의 패러다임.</strong></p>
+<div class="glow-line"></div>
 
-<h3>Investment & Wealth Management</h3>
-<p>Asset management, portfolio advisory, global investment access.</p>
+<h2>개요</h2>
+<p>HK PHONE은 위성 연결, 양자급 보안 암호화, AI 통합 개인 시스템, 스마트 인프라 호환 기술을 결합한 차세대 지능형 통신 디바이스입니다.</p>
 
-<h3>International Finance</h3>
-<p>Cross-border payments, multi-currency accounts, global settlements.</p>
-
-</div>
-
-<div class="section">
-<h2>Security & Compliance</h2>
-<ul>
-<li>Advanced encryption infrastructure</li>
-<li>Real-time fraud monitoring systems</li>
-<li>Global regulatory compliance</li>
-<li>Cybersecurity AI protection</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>Technology Innovation</h2>
+<h2>핵심 기술</h2>
 <p>
-HK-BANK integrates AI, blockchain, quantum-resistant encryption,
-and cloud-native infrastructure to redefine modern banking.
+• 위성 및 우주 네트워크 연결<br>
+• 양자 보안 통신 프로토콜<br>
+• AI 통합 지능형 어시스턴트<br>
+• 고효율 차세대 칩셋<br>
+• 스마트시티·IoT 생태계 통합
 </p>
-</div>
 
-<div class="section">
-<h2>Vision</h2>
+<h2>비전 2035</h2>
+<p>지상과 공중, 우주를 실시간으로 연결하는 통합 글로벌 네트워크를 구축하여 통신 장벽을 제거합니다.</p>
+
+<p><strong>투자 포인트</strong><br>
+글로벌 통신 시장 혁신. 차세대 보안 인프라. 확장 가능한 디바이스 + 플랫폼 모델.</p>
+
+<div class="footer">문의: info@hkphone.com<br>© 2026 HK PHONE</div>
+`,
+
+zh: `
+<h1>HK PHONE</h1>
+<p><strong>超越智能手机，引领未来通信。</strong></p>
+<div class="glow-line"></div>
+
+<h2>概述</h2>
+<p>HK PHONE 是融合卫星通信、量子级加密、AI智能系统及全球智能基础设施的下一代通信设备。</p>
+
+<h2>核心技术</h2>
 <p>
-To become a leading digital-first global bank,
-empowering individuals and businesses worldwide
-with secure and intelligent financial solutions.
+• 卫星与太空网络连接<br>
+• 量子安全通信协议<br>
+• AI智能助手系统<br>
+• 高效能芯片架构<br>
+• 智慧城市与物联网整合
 </p>
-</div>
 
-<div class="section">
-<h2>Contact</h2>
-<p>Email: info@hkbank.com</p>
-</div>
+<h2>2035战略愿景</h2>
+<p>构建连接地面、空中与太空的全球实时通信网络。</p>
 
-</div>
+<p><strong>投资亮点</strong><br>
+全球通信革命，安全基础设施升级，可扩展硬件与平台生态。</p>
 
-<!-- ================= KOREAN ================= -->
-<div id="kr" class="lang">
+<div class="footer">联系: info@hkphone.com<br>© 2026 HK PHONE</div>
+`,
 
-<div class="section">
-<h2>HK-BANK 소개</h2>
+ar: `
+<h1>HK PHONE</h1>
+<p><strong>ما بعد الهواتف الذكية. عصر جديد للاتصال.</strong></p>
+<div class="glow-line"></div>
+
+<h2>نظرة عامة</h2>
+<p>HK PHONE جهاز اتصال ذكي من الجيل القادم يدمج الاتصال عبر الأقمار الصناعية، تشفير كمي متقدم، وأنظمة ذكاء اصطناعي متكاملة.</p>
+
+<h2>التقنيات الأساسية</h2>
 <p>
-HK-BANK는 디지털 금융 혁신을 기반으로 한 글로벌 금융기관입니다.
-전통 금융의 안정성과 첨단 핀테크 기술을 결합합니다.
+• اتصال عبر الأقمار الصناعية والفضاء<br>
+• بروتوكولات اتصال آمنة كمياً<br>
+• مساعد ذكي مدعوم بالذكاء الاصطناعي<br>
+• شريحة عالية الكفاءة في استهلاك الطاقة<br>
+• تكامل مع المدن الذكية وإنترنت الأشياء
 </p>
-</div>
 
-<div class="section">
-<h2>주요 서비스</h2>
+<h2>رؤية 2035</h2>
+<p>إنشاء شبكة اتصالات عالمية موحدة تربط الأرض والجو والفضاء في الوقت الحقيقي.</p>
 
-<h3>개인 금융</h3>
-<p>예금, 입출금 계좌, 체크카드 및 신용카드 서비스.</p>
+<p><strong>فرصة استثمارية</strong><br>
+ثورة في قطاع الاتصالات العالمي، بنية تحتية آمنة، نظام متكامل للأجهزة والمنصات.</p>
 
-<h3>기업 금융</h3>
-<p>기업 대출, 무역 금융, 자금 관리 솔루션.</p>
+<div class="footer">البريد: info@hkphone.com<br>© 2026 HK PHONE</div>
+`
+};
 
-<h3>디지털 뱅킹</h3>
-<p>AI 모바일 뱅킹, 생체 인증, 블록체인 기반 시스템.</p>
+function setLang(lang){
+document.getElementById("content").innerHTML = translations[lang];
+if(lang==="ar"){document.body.dir="rtl";}
+else{document.body.dir="ltr";}
+}
 
-<h3>투자 및 자산 관리</h3>
-<p>자산 운용, 포트폴리오 자문, 글로벌 투자 접근.</p>
+function autoDetect(){
+let l=navigator.language.substring(0,2);
+if(translations[l]){setLang(l);} else{setLang("en");}
+}
 
-<h3>국제 금융</h3>
-<p>해외 송금, 다중 통화 계좌, 글로벌 결제 시스템.</p>
+autoDetect();
 
-</div>
-
-<div class="section">
-<h2>보안 및 규정 준수</h2>
-<ul>
-<li>고급 암호화 인프라</li>
-<li>실시간 사기 탐지 시스템</li>
-<li>글로벌 금융 규정 준수</li>
-<li>AI 기반 사이버 보안</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>기술 혁신</h2>
-<p>
-AI, 블록체인, 양자 내성 암호화 기술을 통합하여
-차세대 디지털 금융을 구현합니다.
-</p>
-</div>
-
-<div class="section">
-<h2>비전</h2>
-<p>
-전 세계 개인과 기업을 위한
-안전하고 지능적인 금융 플랫폼이 되는 것.
-</p>
-</div>
-
-<div class="section">
-<h2>문의</h2>
-<p>이메일: info@hkbank.com</p>
-</div>
-
-</div>
-
-<!-- ================= CHINESE ================= -->
-<div id="cn" class="lang">
-
-<div class="section">
-<h2>关于 HK-BANK</h2>
-<p>
-HK-BANK 是一家新一代全球金融机构，
-融合传统银行实力与先进金融科技平台。
-</p>
-</div>
-
-<div class="section">
-<h2>核心服务</h2>
-
-<h3>个人银行</h3>
-<p>储蓄账户、信用卡、借记卡等服务。</p>
-
-<h3>企业银行</h3>
-<p>企业贷款、贸易融资、资金管理。</p>
-
-<h3>数字银行平台</h3>
-<p>AI移动银行、生物识别安全、区块链整合。</p>
-
-<h3>投资与财富管理</h3>
-<p>资产管理、投资组合咨询、全球投资渠道。</p>
-
-<h3>国际金融</h3>
-<p>跨境支付、多币种账户、全球结算系统。</p>
-
-</div>
-
-<div class="section">
-<h2>安全与合规</h2>
-<ul>
-<li>高级加密系统</li>
-<li>实时反欺诈监控</li>
-<li>全球监管合规</li>
-<li>AI 网络安全保护</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>技术创新</h2>
-<p>
-整合人工智能、区块链与量子安全加密技术，
-打造未来数字金融平台。
-</p>
-</div>
-
-<div class="section">
-<h2>愿景</h2>
-<p>
-成为全球领先的数字化银行，
-为个人与企业提供安全智能的金融解决方案。
-</p>
-</div>
-
-<div class="section">
-<h2>联系</h2>
-<p>邮箱: info@hkbank.com</p>
-</div>
-
-</div>
-
-<!-- ================= ARABIC ================= -->
-<div id="ar" class="lang" dir="rtl">
-
-<div class="section">
-<h2>حول HK-BANK</h2>
-<p>
-HK-BANK مؤسسة مالية عالمية حديثة
-تجمع بين قوة البنوك التقليدية وتقنيات التكنولوجيا المالية المتقدمة.
-</p>
-</div>
-
-<div class="section">
-<h2>الخدمات الأساسية</h2>
-
-<h3>الخدمات المصرفية للأفراد</h3>
-<p>حسابات توفير وجارية وبطاقات ائتمان.</p>
-
-<h3>الخدمات المصرفية للشركات</h3>
-<p>قروض تجارية وتمويل التجارة وإدارة السيولة.</p>
-
-<h3>المنصة الرقمية</h3>
-<p>خدمات مصرفية عبر الهاتف، أمان بيومتري، وتقنية بلوكتشين.</p>
-
-<h3>الاستثمار وإدارة الثروات</h3>
-<p>إدارة الأصول والاستشارات الاستثمارية.</p>
-
-<h3>التمويل الدولي</h3>
-<p>تحويلات عبر الحدود وحسابات متعددة العملات.</p>
-
-</div>
-
-<div class="section">
-<h2>الأمن والامتثال</h2>
-<ul>
-<li>تشفير متقدم</li>
-<li>مراقبة فورية للاحتيال</li>
-<li>الامتثال للوائح الدولية</li>
-<li>حماية سيبرانية مدعومة بالذكاء الاصطناعي</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>الابتكار التقني</h2>
-<p>
-نستخدم الذكاء الاصطناعي وتقنيات البلوكتشين
-لبناء مستقبل الخدمات المصرفية الرقمية.
-</p>
-</div>
-
-<div class="section">
-<h2>الرؤية</h2>
-<p>
-أن نصبح بنكاً رقمياً عالمياً رائداً
-يقدم حلولاً مالية آمنة وذكية للجميع.
-</p>
-</div>
-
-<div class="section">
-<h2>اتصل بنا</h2>
-<p>البريد الإلكتروني: info@hkbank.com</p>
-</div>
-
-</div>
-
-<footer>
-© 2026 HK-BANK. All Rights Reserved.
-<br>
-info@hkbank.com
-</footer>
+</script>
 
 </body>
 </html>
